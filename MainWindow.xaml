@@ -1,0 +1,65 @@
+﻿<Window x:Class="PasswordGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PasswordGenerator"
+        mc:Ignorable="d"
+        Title="Password Generator" Height="500" Width="850">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="346" Height="392" >
+        <TextBox x:Name="passwordLBL" Text="password" FontStyle="Italic" Width="149" HorizontalContentAlignment="Center" Height="22" BorderThickness="0" Margin="0,8"/>
+        <Label Content="Password length:" HorizontalContentAlignment="Center" FontSize="14"/>
+        <TextBox x:Name="lengthPasswordTB" Width="125" Height="22" TextChanged="lengthPasswordTB_TextChanged" BorderBrush="#FF04070E" />
+        <Grid Margin="55,8,55,3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <CheckBox Grid.Column="0" Grid.Row="0" x:Name="lowercaseCB" Content="lowercase" Checked="lowercase_Checked" Unchecked="lowercase_UnChecked" BorderBrush="#FF04070E" FontSize="14"/>
+            <CheckBox Grid.Column="0" Grid.Row="1" x:Name="uppercaseCB" Content="uppercase" Checked="uppercase_Checked" Unchecked="uppercase_UnChecked" BorderBrush="#FF04070E" FontSize="14"/>
+            <CheckBox Grid.Column="1" Grid.Row="0" x:Name="specialSignsCB" HorizontalAlignment="Right" Content="special signs" Checked="specialSigns_Checked" Unchecked="specialSigns_UnChecked" BorderBrush="#FF04070E" FontSize="14" />
+            <CheckBox Grid.Column="1" Grid.Row="1" x:Name="numbersCB" HorizontalAlignment="Right" Content="numbers" Width="97" Checked="numbers_Checked" Unchecked="numbers_UnChecked" BorderBrush="#FF04070E" FontSize="14"/>
+        </Grid>
+        <Button x:Name="generateBTN" Content="Generate" Click="generateBTN_Click" BorderBrush="#FF04070E" Background="#FF30F71C" FontFamily="Arial" Height="25" Margin="127,5"/>
+        <Separator />
+        <Label Content="Password name:" HorizontalContentAlignment="Center" FontSize="14" />
+        <TextBox x:Name="namePasswordTB" Height="23" Width="120" TextChanged="namePasswordTB_TextChanged" BorderBrush="#FF04070E" />
+        <Button x:Name="saveBTN" Content="Save" Margin="127,5" Click="saveBTN_Click" BorderBrush="#FF04070E" Background="#FF30F71C" Height="25" FontFamily="Arial"/>
+        <!-- option without database
+            <ListView Height="97" Width="269" x:Name="passwordLV" Margin="12,0" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="60" DisplayMemberBinding="{Binding name}"/>
+                        <GridViewColumn Header="Password" Width="150" DisplayMemberBinding="{Binding generatedPassword}"/>
+                        <GridViewColumn Header="Delete" Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="deleteBTN" Content="Delete" Click="deletePassword_Click" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            -->
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <DataGrid Name="passwordDG" AutoGenerateColumns="False" CanUserAddRows="false" Margin="10,5" Height="100" BorderBrush="#FF04070E" FontSize="14">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="100" Binding="{Binding name}" />
+                    <DataGridTextColumn Header="Password" Width="150" Binding="{Binding generatedPassword}"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="deletePasswordBTN" Content="Delete" Click="deletePassword_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </StackPanel>
+</Window>
